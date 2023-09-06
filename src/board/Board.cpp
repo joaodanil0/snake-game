@@ -47,10 +47,20 @@ void Board::add(Drawable drawable)
     this->addCharacterAt(drawable.getX(), drawable.getY(), drawable.getCharacter());
 }
 
+void Board::getEmptyCoordinates(int &x, int &y)
+{
+    while( ( mvwinch(this->boardWindow, 
+                        y = rand() % this->height,
+                        x = rand() % this->width)) != ' ');
+}
+
 void Board::contruct(int height, int width)
 {
     int xMax;
     int yMax;
+
+    this->height = height;
+    this->width = width;
 
     getmaxyx(stdscr, yMax, xMax);
 

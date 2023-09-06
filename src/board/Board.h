@@ -1,5 +1,6 @@
 
 #include <ncurses.h>
+#include <stdlib.h>
 
 #include "../drawable/Drawable.h"
 
@@ -7,6 +8,8 @@ class Board{
 
     private:
         WINDOW *boardWindow;
+        int height;
+        int width;
     protected:
     public:
 
@@ -23,6 +26,7 @@ class Board{
         void addCharacterAt(int x, int y, chtype charater);
         chtype getInput();
         void add(Drawable drawable);
+        void getEmptyCoordinates(int &x, int &y);
         
 
 

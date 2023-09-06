@@ -1,4 +1,7 @@
 
+ #ifndef _DRAWABLE_H_
+ #define _DRAWABLE_H_
+
 #include <ncurses.h>
 
 class Drawable{
@@ -19,3 +22,5 @@ class Drawable{
         int getY();
         chtype getCharacter();
 };
+
+ #endif
