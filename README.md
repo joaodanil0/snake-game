@@ -1,10 +1,6 @@
 # snake-game
 
-## To-do
-
-- Montar o tabuleiro
-
-> Video1: https://www.youtube.com/watch?v=AxrQje7V65o&t=1178s
+> Video1: https://www.youtube.com/watch?v=AxrQje7V65o&t=1178s <br>
 > Video2: https://www.youtube.com/watch?v=MH6QlYJ2SwU&list=PL2U2TQ__OrQ_TV2-wuHqGaK8qlnxgKUvK
 
 ## Comentarios

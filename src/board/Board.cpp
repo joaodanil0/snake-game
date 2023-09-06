@@ -1,15 +1,13 @@
 #include "Board.h"
 
+Board::Board()
+{
+    this->contruct(0, 0);
+}
+
 Board::Board(int height, int width)
 {
-    int xMax;
-    int yMax;
-
-    getmaxyx(stdscr, yMax, xMax);
-
-    this->boardWindow = newwin(height, width,
-                                (yMax / 2) - (height / 2),
-                                (xMax / 2) - (width / 2));
+    this->contruct(height, width);
 }
 
 void Board::addBorder()
@@ -42,4 +40,16 @@ void Board::addCharacterAt(int x, int y, chtype character)
 chtype Board::getInput()
 {
     return wgetch(this->boardWindow);
+}
+
+void Board::contruct(int height, int width)
+{
+    int xMax;
+    int yMax;
+
+    getmaxyx(stdscr, yMax, xMax);
+
+    this->boardWindow = newwin(height, width,
+                                (yMax / 2) - (height / 2),
+                                (xMax / 2) - (width / 2));
 }

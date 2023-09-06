@@ -9,9 +9,10 @@ class Board{
     public:
 
     private:
-        
+        void contruct(int height, int width);
     protected:
     public:
+        Board();
         Board(int height, int width);
         void addBorder();
         void clear();

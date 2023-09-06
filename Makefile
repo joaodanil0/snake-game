@@ -1,14 +1,14 @@
 
 CC = g++
-CCFLAGS = -g -Wall -Werror -Wextra
+CCFLAGS = -g -Wall -Wextra #-Werror
 LDFLAGS = -lncurses
 
 TARGET = launch
 
 all: $(TARGET)
 
-$(TARGET): launch.o board.o
-	$(CC) -o launch launch.o Board.o $(LDFLAGS)
+$(TARGET): launch.o board.o game.o
+	$(CC) -o launch launch.o Board.o Game.o $(LDFLAGS)
 
 launch.o: launch.cpp
 	$(CC) $(CCFLAGS) -c launch.cpp
@@ -16,8 +16,8 @@ launch.o: launch.cpp
 board.o: */*/Board.cpp
 	$(CC) $(CCFLAGS) -c */*/Board.cpp
 
-# apple.o: */Apple.cpp
-# 	$(CC) $(CCFLAGS) -c */Apple.cpp
+game.o: */*/Game.cpp
+	$(CC) $(CCFLAGS) -c */*/Game.cpp
 
 clean:
 		rm -rf *.o

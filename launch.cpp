@@ -1,7 +1,7 @@
 
 #include <ncurses.h>
 
-#include "src/board/Board.h"
+#include "src/game/Game.h"
 
 
 #define ROWS 20
@@ -14,8 +14,19 @@ int main(){
     initscr();
     refresh();
 
-    Board board(ROWS, COLS);
-    board.initialize();
+    noecho();
+
+    Game game(ROWS, COLS);
+
+    while (!game.isOver()){
+
+        game.processInput();
+
+        game.updateState();
+
+        game.redraw();
+    }
+
     getch();
     endwin();
 
