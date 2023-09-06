@@ -11,12 +11,11 @@ Game::Game(int height, int width)
 void Game::processInput()
 {
     chtype input = this->board.getInput();
-
 }
 
 void Game::updateState()
 {
-    
+    this->board.add(Drawable(3, 3, '#'));
 }
 
 void Game::redraw()

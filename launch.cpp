@@ -13,7 +13,6 @@ int main(){
 
     initscr();
     refresh();
-
     noecho();
 
     Game game(ROWS, COLS);

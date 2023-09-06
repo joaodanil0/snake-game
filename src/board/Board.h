@@ -1,6 +1,8 @@
 
 #include <ncurses.h>
 
+#include "../drawable/Drawable.h"
+
 class Board{
 
     private:
@@ -20,6 +22,7 @@ class Board{
         void initialize();
         void addCharacterAt(int x, int y, chtype charater);
         chtype getInput();
+        void add(Drawable drawable);
         
 
 

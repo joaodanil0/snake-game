@@ -42,6 +42,11 @@ chtype Board::getInput()
     return wgetch(this->boardWindow);
 }
 
+void Board::add(Drawable drawable)
+{
+    this->addCharacterAt(drawable.getX(), drawable.getY(), drawable.getCharacter());
+}
+
 void Board::contruct(int height, int width)
 {
     int xMax;
