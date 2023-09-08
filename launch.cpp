@@ -4,8 +4,9 @@
 #include "src/game/Game.h"
 
 
-#define ROWS 20
-#define COLS ROWS * 2.5
+#define COLS 30 // X
+#define ROWS 10 // Y
+
 
 
 int main(){
@@ -14,8 +15,15 @@ int main(){
     initscr();
     refresh();
     noecho();
+    curs_set(0);
 
-    Game game(ROWS, COLS);
+    //* Print example
+    printw("This is an example of print: ");
+    printw("col: %d | row: %d\n", 1, 1);
+    refresh();
+    //* end Print example
+
+    Game game(COLS, ROWS);
 
     while (!game.isOver()){
 

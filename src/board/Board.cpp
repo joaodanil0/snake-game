@@ -5,9 +5,9 @@ Board::Board()
     this->contruct(0, 0);
 }
 
-Board::Board(int height, int width)
+Board::Board(int width, int height)
 {
-    this->contruct(height, width);
+    this->contruct(width, height);
 }
 
 void Board::addBorder()
@@ -54,7 +54,7 @@ void Board::getEmptyCoordinates(int &x, int &y)
                         x = rand() % this->width)) != ' ');
 }
 
-void Board::contruct(int height, int width)
+void Board::contruct(int width, int height)
 {
     int xMax;
     int yMax;
@@ -67,4 +67,6 @@ void Board::contruct(int height, int width)
     this->boardWindow = newwin(height, width,
                                 (yMax / 2) - (height / 2),
                                 (xMax / 2) - (width / 2));
+
+    wtimeout(this->boardWindow, 1000);
 }

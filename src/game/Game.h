@@ -6,20 +6,23 @@
 #include "../board/Board.h"
 #include "../apple/Apple.h"
 #include "../empty/Empty.h"
+#include "../snake/Snake.h"
 
 class Game
 {
     private:
         bool isGameOver;
         Board board;
-        Apple *apple;
+        Apple *apple = NULL;
+        Snake snake;
     protected:
     public:
 
     private:
+        void initialize();
     protected:
     public:
-        Game(int height, int width);
+        Game(int width, int height);
         ~Game();
         void processInput();
         void updateState();

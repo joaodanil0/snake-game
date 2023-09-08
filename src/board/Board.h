@@ -14,11 +14,11 @@ class Board{
     public:
 
     private:
-        void contruct(int height, int width);
+        void contruct(int width, int height);
     protected:
     public:
         Board();
-        Board(int height, int width);
+        Board(int width, int height);
         void addBorder();
         void clear();
         void refresh();
