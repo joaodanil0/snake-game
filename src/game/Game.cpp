@@ -7,24 +7,17 @@ Game::Game(int width, int height)
     this->board = Board(width, height);
     this->initialize();
 
-    SnakePiece piece = SnakePiece(14, 5);
-    this->board.add(piece);
-    this->snake.addPiece(piece);
-
-    piece = this->snake.nextHead();
-    this->board.add(piece);
-    this->snake.addPiece(piece);
-
-    piece = this->snake.nextHead();
-    this->board.add(piece);
-    this->snake.addPiece(piece);
+    handleNextPiece(SnakePiece(14, 2));
+    handleNextPiece(this->snake.nextHead());
+    handleNextPiece(this->snake.nextHead());
+    handleNextPiece(this->snake.nextHead());
 
     this->snake.setDirection(Snake::RIGHT);
 
-    piece = this->snake.nextHead();
-    this->board.add(piece);
-    this->snake.addPiece(piece);
+    handleNextPiece(this->snake.nextHead());
 
+    if (this->apple == NULL)
+        this->createApple();
 }
 
 Game::~Game()
@@ -38,6 +31,43 @@ void Game::initialize()
     this->isGameOver = false;
 
     srand(time(NULL));
+}
+
+void Game::createApple()
+{
+    int x, y;
+    this->board.getEmptyCoordinates(x, y);
+    apple = new Apple(x, y);
+    this->board.add(*apple);
+}
+
+void Game::handleNextPiece(SnakePiece piece)
+{
+    if  (this->apple != NULL && 
+            (piece.getX() != this->apple->getX() ||
+            piece.getY() != this->apple->getY())
+        )
+    {
+            int emptyCol = snake.tail().getX();
+            int emptyRow = snake.tail().getY();
+
+            this->board.add(Empty(emptyCol, emptyRow));
+            this->snake.removePiece();
+    }
+    else
+    {
+        this->destroyApple();
+    }
+
+    this->board.add(piece);
+    this->snake.addPiece(piece);
+
+}
+
+void Game::destroyApple()
+{
+    delete this->apple;
+    this->apple = NULL;
 }
 
 void Game::processInput()
@@ -71,30 +101,10 @@ void Game::processInput()
 void Game::updateState()
 {   
 
+    this->handleNextPiece(this->snake.nextHead());
+   
     if (this->apple == NULL)
-    {
-        int x, y;
-        this->board.getEmptyCoordinates(x, y);
-        apple = new Apple(x, y);
-        this->board.add(*apple);
-    }
-
-    SnakePiece piece = snake.nextHead();
-
-    if (piece.getX() != this->apple->getX() &&
-        piece.getY() != this->apple->getY())
-    {
-            int emptyCol = snake.tail().getX();
-            int emptyRow = snake.tail().getY();
-
-            this->board.add(Empty(emptyCol, emptyRow));
-            this->snake.removePiece();
-    }
-
-    this->board.add(piece);
-    this->snake.addPiece(piece);
-
-    
+        this->createApple();
 }
 
 void Game::redraw()

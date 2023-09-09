@@ -20,6 +20,9 @@ class Game
 
     private:
         void initialize();
+        void createApple();
+        void handleNextPiece(SnakePiece piece);
+        void destroyApple();
     protected:
     public:
         Game(int width, int height);
