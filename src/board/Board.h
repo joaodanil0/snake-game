@@ -27,7 +27,7 @@ class Board{
         chtype getInput();
         void add(Drawable drawable);
         void getEmptyCoordinates(int &x, int &y);
-        
+        chtype getCharacterAt(int x, int y);
 
 
 };

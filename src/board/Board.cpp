@@ -54,6 +54,11 @@ void Board::getEmptyCoordinates(int &x, int &y)
                         x = rand() % this->width)) != ' ');
 }
 
+chtype Board::getCharacterAt(int x, int y)
+{
+    return mvwinch(this->boardWindow, y, x);
+}
+
 void Board::contruct(int width, int height)
 {
     int xMax;

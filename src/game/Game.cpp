@@ -43,22 +43,28 @@ void Game::createApple()
 
 void Game::handleNextPiece(SnakePiece piece)
 {
-    if  (this->apple != NULL && 
-            (piece.getX() != this->apple->getX() ||
-            piece.getY() != this->apple->getY())
-        )
+    if (this->apple != NULL)
     {
-            int emptyCol = snake.tail().getX();
-            int emptyRow = snake.tail().getY();
+        switch (this->board.getCharacterAt(piece.getX(), piece.getY()))
+        {
+            case 'A':
+                this->destroyApple();
+                break;
+            case ' ':
+            {
+                int emptyCol = snake.tail().getX();
+                int emptyRow = snake.tail().getY();
 
-            this->board.add(Empty(emptyCol, emptyRow));
-            this->snake.removePiece();
+                this->board.add(Empty(emptyCol, emptyRow));
+                this->snake.removePiece();
+                break;
+            }
+            default:
+                this->isGameOver = true;
+                break;
+        }
     }
-    else
-    {
-        this->destroyApple();
-    }
-
+    
     this->board.add(piece);
     this->snake.addPiece(piece);
 

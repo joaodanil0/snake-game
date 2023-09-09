@@ -1,4 +1,5 @@
 
+#include <iostream>
 #include <ncurses.h>
 
 #include "src/game/Game.h"
@@ -34,8 +35,10 @@ int main(){
         game.redraw();
     }
 
-    getch();
     endwin();
+    
+    std::cout << "Game Over" << std::endl;
+    
 
 
     return 0;
