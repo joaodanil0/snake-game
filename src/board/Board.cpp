@@ -2,12 +2,12 @@
 
 Board::Board()
 {
-    this->contruct(0, 0);
+    this->contruct(0, 0, 300);
 }
 
-Board::Board(int width, int height)
+Board::Board(int width, int height, int speed)
 {
-    this->contruct(width, height);
+    this->contruct(width, height, speed);
 }
 
 void Board::addBorder()
@@ -59,7 +59,17 @@ chtype Board::getCharacterAt(int x, int y)
     return mvwinch(this->boardWindow, y, x);
 }
 
-void Board::contruct(int width, int height)
+int Board::getStartRow()
+{
+    return this->startRow;
+}
+
+int Board::getStartCol()
+{
+    return this->startCol;
+}
+
+void Board::contruct(int width, int height, int speed)
 {
     int xMax;
     int yMax;
@@ -69,10 +79,11 @@ void Board::contruct(int width, int height)
 
     getmaxyx(stdscr, yMax, xMax);
 
-    this->boardWindow = newwin(height, width,
-                                (yMax / 2) - (height / 2),
-                                (xMax / 2) - (width / 2));
+    this->startRow = (yMax / 2) - (height / 2);
+    this->startCol = (xMax / 2) - (width / 2);
 
-    wtimeout(this->boardWindow, 1000);
+    this->boardWindow = newwin(height, width, this->startRow, this->startCol);
+
+    wtimeout(this->boardWindow, speed);
     keypad(this->boardWindow, true);
 }

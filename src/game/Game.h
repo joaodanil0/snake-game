@@ -7,6 +7,7 @@
 #include "../apple/Apple.h"
 #include "../empty/Empty.h"
 #include "../snake/Snake.h"
+#include "../scoreboard/ScoreBoard.h"
 
 class Game
 {
@@ -15,6 +16,8 @@ class Game
         Board board;
         Apple *apple = NULL;
         Snake snake;
+        ScoreBoard scoreBoard;
+        int score = 0;
     protected:
     public:
 
@@ -22,14 +25,15 @@ class Game
         void initialize();
         void createApple();
         void handleNextPiece(SnakePiece piece);
-        void destroyApple();
+        void eatApple();
     protected:
     public:
-        Game(int width, int height);
+        Game(int width, int height, int speed = 300);
         ~Game();
         void processInput();
         void updateState();
         void redraw();
         bool isOver();
+        int getScore();
 
 };

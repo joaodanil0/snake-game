@@ -7,8 +7,8 @@ TARGET = launch
 
 all: $(TARGET)
 
-$(TARGET): launch.o board.o game.o drawable.o apple.o empty.o snakepiece.o snake.o
-	$(CC) -o launch launch.o Board.o Game.o Drawable.o Apple.o Empty.o SnakePiece.o Snake.o $(LDFLAGS)
+$(TARGET): launch.o board.o game.o drawable.o apple.o empty.o snakepiece.o snake.o scoreboard.o
+	$(CC) -o launch launch.o Board.o Game.o Drawable.o Apple.o Empty.o SnakePiece.o Snake.o ScoreBoard.o $(LDFLAGS)
 
 launch.o: launch.cpp
 	$(CC) $(CCFLAGS) -c launch.cpp
@@ -33,6 +33,9 @@ snakepiece.o: */*/SnakePiece.cpp
 
 snake.o: */*/Snake.cpp
 	$(CC) $(CCFLAGS) -c */*/Snake.cpp
+
+scoreboard.o: */*/ScoreBoard.cpp
+	$(CC) $(CCFLAGS) -c */*/ScoreBoard.cpp
 
 clean:
 		rm -rf *.o

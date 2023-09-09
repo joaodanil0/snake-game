@@ -1,11 +1,30 @@
 #include "Game.h"
 
-
-
-Game::Game(int width, int height)
+Game::Game(int width, int height, int speed)
 {
-    this->board = Board(width, height);
+    this->board = Board(width, height, speed);
+    
+    int scoreBoardRow = this->board.getStartRow() + height;
+    int scoreBoardCol = this->board.getStartCol();
+
+    this->scoreBoard = ScoreBoard(width, scoreBoardCol, scoreBoardRow);
     this->initialize();
+
+}
+
+Game::~Game()
+{
+    delete this->apple;
+}
+
+void Game::initialize()
+{
+    this->board.initialize();
+
+    this->scoreBoard.initialize(this->score);
+    this->isGameOver = false;
+
+    srand(time(NULL));
 
     handleNextPiece(SnakePiece(14, 2));
     handleNextPiece(this->snake.nextHead());
@@ -18,19 +37,6 @@ Game::Game(int width, int height)
 
     if (this->apple == NULL)
         this->createApple();
-}
-
-Game::~Game()
-{
-    delete this->apple;
-}
-
-void Game::initialize()
-{
-    this->board.initialize();
-    this->isGameOver = false;
-
-    srand(time(NULL));
 }
 
 void Game::createApple()
@@ -48,7 +54,7 @@ void Game::handleNextPiece(SnakePiece piece)
         switch (this->board.getCharacterAt(piece.getX(), piece.getY()))
         {
             case 'A':
-                this->destroyApple();
+                this->eatApple();
                 break;
             case ' ':
             {
@@ -70,10 +76,12 @@ void Game::handleNextPiece(SnakePiece piece)
 
 }
 
-void Game::destroyApple()
+void Game::eatApple()
 {
     delete this->apple;
     this->apple = NULL;
+    this->score += 100;
+    this->scoreBoard.updateScore(this->score);
 }
 
 void Game::processInput()
@@ -116,9 +124,15 @@ void Game::updateState()
 void Game::redraw()
 {
     this->board.refresh();
+    this->scoreBoard.refresh();
 }
 
 bool Game::isOver()
 {
     return this->isGameOver;
+}
+
+int Game::getScore()
+{
+    return this->score;
 }

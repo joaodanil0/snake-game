@@ -4,11 +4,8 @@
 
 #include "src/game/Game.h"
 
-
 #define COLS 30 // X
 #define ROWS 10 // Y
-
-
 
 int main(){
 
@@ -37,9 +34,7 @@ int main(){
 
     endwin();
     
-    std::cout << "Game Over" << std::endl;
-    
-
+    std::cout << "You score: " << game.getScore() << " points!" << std::endl;
 
     return 0;
 }
