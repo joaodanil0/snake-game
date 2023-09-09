@@ -69,4 +69,5 @@ void Board::contruct(int width, int height)
                                 (xMax / 2) - (width / 2));
 
     wtimeout(this->boardWindow, 1000);
+    keypad(this->boardWindow, true);
 }

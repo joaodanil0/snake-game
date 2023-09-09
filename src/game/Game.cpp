@@ -43,6 +43,29 @@ void Game::initialize()
 void Game::processInput()
 {
     chtype input = this->board.getInput();
+
+    switch (input)
+    {
+        case KEY_UP:
+            this->snake.setDirection(Snake::UP);
+            break;
+        case KEY_DOWN:
+            this->snake.setDirection(Snake::DOWN);
+            break;
+        case KEY_LEFT:
+            this->snake.setDirection(Snake::LEFT);
+            break;
+        case KEY_RIGHT:
+            this->snake.setDirection(Snake::RIGHT);
+            break;
+        case 'p':
+            //! board.setTimeout not implemented 
+            //! Tutorial 9 - 11:45
+            while (board.getInput() != 'p');
+            break;
+        default:
+            break;
+    }
 }
 
 void Game::updateState()

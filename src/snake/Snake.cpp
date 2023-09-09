@@ -27,7 +27,8 @@ Snake::Direction Snake::getDirection()
 
 void Snake::setDirection(Direction direction)
 {
-    this->currentDirection = direction;
+    if (this->currentDirection + direction)
+        this->currentDirection = direction;
 }
 
 SnakePiece Snake::nextHead()
