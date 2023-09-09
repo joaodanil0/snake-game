@@ -39,7 +39,22 @@ void Board::addCharacterAt(int x, int y, chtype character)
 
 chtype Board::getInput()
 {
-    return wgetch(this->boardWindow);
+    time_t timeLastInput = Time::milliseconds();
+
+    chtype input = wgetch(this->boardWindow);
+    chtype newInput = ERR;
+
+    wtimeout(this->boardWindow, 0);
+    while (timeLastInput + this->speed >= Time::milliseconds())
+    {
+        newInput = wgetch(this->boardWindow);
+    }
+    wtimeout(this->boardWindow, this->speed);
+
+    if (newInput != ((chtype) ERR))
+        input = newInput;
+
+    return input;
 }
 
 void Board::add(Drawable drawable)
@@ -69,6 +84,11 @@ int Board::getStartCol()
     return this->startCol;
 }
 
+void Board::increaseSpeed()
+{
+    this->speed -= 20;
+}
+
 void Board::contruct(int width, int height, int speed)
 {
     int xMax;
@@ -83,6 +103,8 @@ void Board::contruct(int width, int height, int speed)
     this->startCol = (xMax / 2) - (width / 2);
 
     this->boardWindow = newwin(height, width, this->startRow, this->startCol);
+
+    this->speed = speed;
 
     wtimeout(this->boardWindow, speed);
     keypad(this->boardWindow, true);

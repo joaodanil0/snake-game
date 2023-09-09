@@ -3,8 +3,10 @@
 #include <stdlib.h>
 
 #include "../drawable/Drawable.h"
+#include "../time/Time.h"
 
-class Board{
+class Board
+{
 
     private:
         WINDOW *boardWindow;
@@ -12,6 +14,7 @@ class Board{
         int width;
         int startRow;
         int startCol;
+        int speed;
     protected:
     public:
 
@@ -32,6 +35,6 @@ class Board{
         chtype getCharacterAt(int x, int y);
         int getStartRow();
         int getStartCol();
-
+        void increaseSpeed();
 
 };

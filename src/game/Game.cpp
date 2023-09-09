@@ -82,6 +82,7 @@ void Game::eatApple()
     this->apple = NULL;
     this->score += 100;
     this->scoreBoard.updateScore(this->score);
+    this->board.increaseSpeed();
 }
 
 void Game::processInput()
@@ -104,7 +105,8 @@ void Game::processInput()
             break;
         case 'p':
             //! board.setTimeout not implemented 
-            //! Tutorial 9 - 11:45
+            //! Tutorial 09 - 11:45
+            //! Tutorial 13 - 03:59
             while (board.getInput() != 'p');
             break;
         default:
